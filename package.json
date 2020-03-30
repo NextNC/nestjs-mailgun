@@ -1,10 +1,9 @@
 {
-  "name": "@nextm/nestjs-mailgun",
-  "version": "1.0.0-rc.1",
+  "name": "@nextnm/nestjs-mailgun",
+  "version": "0.0.1-beta-1",
   "description": "NestJS provider for sending emails with mailgun",
   "author": "Nuno Carvalhão <nuno.carvalhao@gmail.com>",
   "license": "MIT",
-  "readmeFilename": "README.md",
   "main": "dist/test.js",
   "files": [
     "dist/**/*",
@@ -31,31 +30,37 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/nestjsplus/nestjs-package-starter"
+    "url": "https://github.com/NextNC/nestjs-mailgun"
   },
-  "bugs": "https://github.com/nestjsplus/nestjs-package-starter",
+  "bugs": {
+    "url": "https://github.com/NextNC/nestjs-mailgun"
+  },
   "peerDependencies": {
-    "@nestjs/common": "^6.0.0"
+    "@nestjs/common": "^7.0.7"
   },
-  "dependencies": {},
+  "dependencies": {
+    "mailgun-js": "^0.22.0",
+    "reflect-metadata": "^0.1.13",
+    "rxjs": "^6.5.4"
+  },
   "devDependencies": {
-    "@nestjs/common": "^6.11.11",
-    "@nestjs/core": "^6.11.11",
-    "@nestjs/platform-express": "^6.11.11",
-    "@nestjs/testing": "6.1.1",
-    "@types/express": "4.16.1",
-    "@types/jest": "24.0.11",
-    "@types/node": "11.13.4",
-    "@types/supertest": "2.0.7",
-    "jest": "24.7.1",
-    "prettier": "1.17.0",
+    "@nestjs/common": "^7.0.7",
+    "@nestjs/core": "^7.0.7",
+    "@nestjs/platform-express": "^7.0.7",
+    "@nestjs/testing": "7.0.7",
+    "@types/express": "4.17.3",
+    "@types/jest": "25.1.4",
+    "@types/node": "13.9.5",
+    "@types/supertest": "2.0.8",
+    "jest": "25.2.4",
+    "prettier": "2.0.2",
     "supertest": "4.0.2",
-    "ts-jest": "24.0.2",
-    "ts-node": "8.1.0",
-    "tsc-watch": "2.2.1",
-    "tsconfig-paths": "3.8.0",
-    "tslint": "5.16.0",
-    "typescript": "3.4.3"
+    "ts-jest": "25.3.0",
+    "ts-node": "8.8.1",
+    "tsc-watch": "4.2.3",
+    "tsconfig-paths": "3.9.0",
+    "tslint": "6.1.0",
+    "typescript": "^3.8.3"
   },
   "jest": {
     "moduleFileExtensions": [
@@ -70,5 +75,6 @@
     },
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
-  }
+  },
+  "homepage": "https://github.com/nestjsplus/nestjs-package-starter#readme"
 }
