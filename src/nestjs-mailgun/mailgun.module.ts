@@ -4,10 +4,10 @@ import { AKI_KEY, DOMAIN, PUBLIC_API_KEY } from './tokens/tokens';
 import { MailgunService } from './services/relay/mailgun.service';
 
 @Module({})
-export class NestjsMailgunModule {
+export class MailgunModule {
   public static forRoot(config: ConfigurationMailgun) {
     return {
-      module: NestjsMailgunModule,
+      module: MailgunModule,
       //   controllers: [
       //     ...controllers,
       //   ],
