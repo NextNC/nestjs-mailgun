@@ -33,10 +33,10 @@ npm install @nextnm/nestjs-mailgun
 #### Importing module
 
 ```typescript
-import { NestjsMailgunModule } from '@nextm/nestjs-mailgun';
+import { MailgunModule } from '@nextm/nestjs-mailgun';
 @Module({
   imports: [
-    NestjsMailgunModule.forRoot({
+    MailgunModule.forRoot({
       DOMAIN: '<Your Domain>',
       AKI_KEY: '<Your AKI_KEY>',
     }),
