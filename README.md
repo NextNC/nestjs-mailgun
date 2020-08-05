@@ -20,7 +20,7 @@
 ### Introduction
 
 This is a simple wrapper of [mailgun-js](https://www.npmjs.com/package/mailgun-js).
-It only comtemplates the send email and verify email functionalities, but later it will be added more. Just ping me or open pull request and contribute :)
+It only supports sending and verifying emails, but later more will be added. Just ping me or open pull request and contribute :)
 
 ### Installation
 
@@ -38,7 +38,7 @@ import { MailgunModule } from '@nextm/nestjs-mailgun';
   imports: [
     MailgunModule.forRoot({
       DOMAIN: '<Your Domain>',
-      AKI_KEY: '<Your AKI_KEY>',
+      API_KEY: '<Your API_KEY>',
     }),
   ],
   providers: [],
