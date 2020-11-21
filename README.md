@@ -39,6 +39,7 @@ import { MailgunModule } from '@nextnm/nestjs-mailgun';
     MailgunModule.forRoot({
       DOMAIN: '<Your Domain>',
       API_KEY: '<Your API_KEY>',
+      HOST: '<Your Host>', // default: 'api.mailgun.net'. Note that if you are using the EU region the host should be set to 'api.eu.mailgun.net'
     }),
   ],
   providers: [],

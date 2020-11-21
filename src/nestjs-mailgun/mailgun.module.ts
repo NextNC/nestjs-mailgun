@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigurationMailgun } from './configuration';
 import { MailgunService } from './services/relay/mailgun.service';
-import { API_KEY, DOMAIN, PUBLIC_API_KEY } from './tokens/tokens';
+import { API_KEY, DOMAIN, HOST, PUBLIC_API_KEY } from './tokens/tokens';
 
 @Module({})
 export class MailgunModule {
@@ -18,6 +18,7 @@ export class MailgunModule {
           useValue: config.PUBLIC_API_KEY ? config.PUBLIC_API_KEY : '',
         },
         { provide: DOMAIN, useValue: config.DOMAIN },
+        { provide: HOST, useValue: config.HOST || 'api.mailgun.net' },
         MailgunService,
       ],
       exports: [MailgunService],
