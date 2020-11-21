@@ -4,11 +4,14 @@ import * as mailgunConfig from 'mailgun-js';
 
 export interface EmailOptions {
   from: string;
-  to: string;
+  to: string | string[];
   subject: string;
   text?: string;
   html?: string;
   attachment?;
+  'recipient-variables'?: {
+    [email: string]: any;
+  }
 }
 @Injectable()
 export class MailgunService {
@@ -34,7 +37,7 @@ export class MailgunService {
 
   public validateEmail(email: string): Promise<boolean> {
     return new Promise((resolve, reject) => {
-      this.mailgun.validate('test@mail.com', (err, body) => {
+      this.mailgun.validate(email, (err, body) => {
         if (body && body.is_valid) {
           resolve(true);
         } else {
