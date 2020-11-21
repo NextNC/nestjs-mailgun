@@ -33,7 +33,7 @@ npm install @nextnm/nestjs-mailgun
 #### Importing module
 
 ```typescript
-import { MailgunModule } from '@nextm/nestjs-mailgun';
+import { MailgunModule } from '@nextnm/nestjs-mailgun';
 @Module({
   imports: [
     MailgunModule.forRoot({
@@ -66,8 +66,8 @@ interface EmailOptions {
 #### Calling Send Method
 
 ```typescript
-import { MailgunService } from '@nextm/nestjs-mailgun';
-import { EmailOptions } from '@nextm/nestjs-mailgun'
+import { MailgunService } from '@nextnm/nestjs-mailgun';
+import { EmailOptions } from '@nextnm/nestjs-mailgun'
 
 @Injectable()
 export class YourService {
@@ -90,8 +90,8 @@ export class YourService {
 To check if an email is real or not.
 
 ```typescript
-import { MailgunService } from '@nextm/nestjs-mailgun';
-import { EmailOptions } from '@nextm/nestjs-mailgun'
+import { MailgunService } from '@nextnm/nestjs-mailgun';
+import { EmailOptions } from '@nextnm/nestjs-mailgun'
 
 @Injectable()
 export class YourService {
