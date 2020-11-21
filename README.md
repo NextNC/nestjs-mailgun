@@ -52,11 +52,14 @@ export class YourModule {}
 ```typescript
 interface EmailOptions {
   from: string;
-  to: string;
+  to: string | string[];
   subject: string;
   text?: string;
   html?: string;
   attachment?;
+  'recipient-variables'?: {
+    [email: string]: any;
+  }
 }
 ```
 
