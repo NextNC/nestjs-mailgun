@@ -8,6 +8,7 @@ export interface EmailOptions {
   subject: string;
   text?: string;
   html?: string;
+  template?: string;
   attachment?;
   'recipient-variables'?: {
     [email: string]: any;
