@@ -1,7 +1,10 @@
-import { Module } from '@nestjs/common';
-import { ConfigurationMailgun } from './configuration';
+import { Module, Provider } from '@nestjs/common';
+import {
+  ConfigurationMailgun,
+  ConfigurationMailgunAsync,
+} from './configuration';
 import { MailgunService } from './services/relay/mailgun.service';
-import { API_KEY, DOMAIN, HOST, PUBLIC_API_KEY } from './tokens/tokens';
+import { MAILGUN_CONFIGURATION } from './tokens/tokens';
 
 @Module({})
 export class MailgunModule {
@@ -12,16 +15,30 @@ export class MailgunModule {
       //     ...controllers,
       //   ],
       providers: [
-        { provide: API_KEY, useValue: config.API_KEY },
-        {
-          provide: PUBLIC_API_KEY,
-          useValue: config.PUBLIC_API_KEY ? config.PUBLIC_API_KEY : '',
-        },
-        { provide: DOMAIN, useValue: config.DOMAIN },
-        { provide: HOST, useValue: config.HOST || 'api.mailgun.net' },
+        { provide: MAILGUN_CONFIGURATION, useValue: config },
         MailgunService,
       ],
       exports: [MailgunService],
+    };
+  }
+  public static forAsyncRoot(config: ConfigurationMailgunAsync) {
+    return {
+      module: MailgunModule,
+      //   controllers: [
+      //     ...controllers,
+      //   ],
+      imports: config.imports || [],
+      providers: [this.createAsyncProviders(config), MailgunService],
+      exports: [MailgunService],
+    };
+  }
+  private static createAsyncProviders(
+    options: ConfigurationMailgunAsync,
+  ): Provider {
+    return {
+      provide: MAILGUN_CONFIGURATION,
+      useFactory: options.useFactory,
+      inject: options.inject || [],
     };
   }
 }

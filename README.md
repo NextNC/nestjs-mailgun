@@ -48,6 +48,28 @@ import { MailgunModule } from '@nextnm/nestjs-mailgun';
 export class YourModule {}
 ```
 
+#### Importing module Async
+
+```typescript
+import { MailgunModule } from '@nextnm/nestjs-mailgun';
+@Module({
+  imports: [
+    MailgunModule.forAsyncRoot({
+      useFactory: async () => {
+        return {
+          DOMAIN: '<Your Domain>',
+          API_KEY: '<Your API_KEY>',
+          HOST: '<Your Host>', // default: 'api.mailgun.net'. Note that if you are using the EU region the host should be set to 'api.eu.mailgun.net'
+        };
+      },
+    }),
+  ],
+  providers: [],
+  exports: [],
+})
+export class YourModule {}
+```
+
 #### Interfaces
 
 ```typescript
@@ -61,7 +83,7 @@ interface EmailOptions {
   attachment?;
   'recipient-variables'?: {
     [email: string]: any;
-  }
+  };
 }
 ```
 
