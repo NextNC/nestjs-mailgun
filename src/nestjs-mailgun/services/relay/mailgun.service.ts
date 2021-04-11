@@ -2,6 +2,7 @@ import { Injectable, Inject } from '@nestjs/common';
 import { MAILGUN_CONFIGURATION } from '../../tokens/tokens';
 import * as mailgunConfig from 'mailgun-js';
 import { ConfigurationMailgun } from '../../../nestjs-mailgun/configuration';
+import { MailgunEmailModel } from '../../../nestjs-mailgun/classes/mailgun-email-model';
 
 export interface EmailOptions {
   from: string;
@@ -11,9 +12,7 @@ export interface EmailOptions {
   html?: string;
   template?: string;
   attachment?;
-  'recipient-variables'?: {
-    [email: string]: any;
-  };
+  'h:X-Mailgun-Variables'?: string;
 }
 @Injectable()
 export class MailgunService {
@@ -30,7 +29,7 @@ export class MailgunService {
     });
   }
 
-  public sendEmail(emailOptions: EmailOptions): Promise<boolean> {
+  public sendEmail(emailOptions: EmailOptions | MailgunEmailModel): Promise<any> {
     return new Promise((resolve, reject) => {
       this.mailgun.messages().send(emailOptions, (error, body) => {
         if (error) {
