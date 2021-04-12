@@ -81,9 +81,7 @@ interface EmailOptions {
   html?: string;
   template?: string;
   attachment?;
-  'recipient-variables'?: {
-    [email: string]: any;
-  };
+  'h:X-Mailgun-Variables'?: string;
 }
 ```
 
@@ -103,9 +101,17 @@ export class YourService {
       text: '',
       html: '',
       attachment:''
+      'h:X-Mailgun-Variables': '{"key":"value"}'
     };
 
     await this.mailgunService.sendEmail(options);
+
+
+    // OR can use the class
+
+    const email = new MailgunEmailModel('from', 'to', 'subject', 'text', 'html', 'template','attachment', { key: 'value' });
+
+    await this.mailgunService.sendEmail(email);
   }
 ```
 
@@ -120,7 +126,7 @@ import { EmailOptions } from '@nextnm/nestjs-mailgun'
 @Injectable()
 export class YourService {
   constructor(private mailgunService: MailgunService) {
-    await this.mailgunService.verifyEmail('next@examle.com);
+    await this.mailgunService.verifyEmail('next@examle.com');
   }
 }
 ```
