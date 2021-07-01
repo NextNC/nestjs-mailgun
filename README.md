@@ -126,7 +126,7 @@ import { EmailOptions } from '@nextnm/nestjs-mailgun'
 @Injectable()
 export class YourService {
   constructor(private mailgunService: MailgunService) {
-    await this.mailgunService.verifyEmail('next@examle.com');
+    await this.mailgunService.validateEmail('next@examle.com');
   }
 }
 ```
