@@ -1,16 +1,10 @@
 import { ModuleMetadata } from '@nestjs/common/interfaces';
+import Options from 'mailgun.js/dist/lib/interfaces/Options';
 
-export interface ConfigurationMailgun {
-  DOMAIN: string;
-  API_KEY: string;
-  PUBLIC_API_KEY?: string;
-  HOST?: string;
-}
-
-export interface ConfigurationMailgunAsync
+export interface OptionsAsync
   extends Pick<ModuleMetadata, 'imports'> {
   useFactory: (
     ...args: any[]
-  ) => ConfigurationMailgun | Promise<ConfigurationMailgun>;
+  ) => Options | Promise<Options>;
   inject?: any[];
 }
