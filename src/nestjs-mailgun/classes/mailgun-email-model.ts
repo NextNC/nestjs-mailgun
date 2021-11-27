@@ -9,6 +9,7 @@ export class MailgunEmailModel implements EmailOptions {
     public subject: string,
     public text?: string,
     public html?: string,
+    public message?:string,
     public template?: string,
     public attachment?: any,
     public templateVariables?: { [key: string]: any },

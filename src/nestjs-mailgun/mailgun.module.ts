@@ -1,14 +1,12 @@
 import { Module, Provider } from '@nestjs/common';
-import {
-  ConfigurationMailgun,
-  ConfigurationMailgunAsync,
-} from './configuration';
+import Options from 'mailgun.js/dist/lib/interfaces/Options';
+import { OptionsAsync } from './configuration';
 import { MailgunService } from './services/relay/mailgun.service';
 import { MAILGUN_CONFIGURATION } from './tokens/tokens';
 
 @Module({})
 export class MailgunModule {
-  public static forRoot(config: ConfigurationMailgun) {
+  public static forRoot(config: Options) {
     return {
       module: MailgunModule,
       //   controllers: [
@@ -21,7 +19,7 @@ export class MailgunModule {
       exports: [MailgunService],
     };
   }
-  public static forAsyncRoot(config: ConfigurationMailgunAsync) {
+  public static forAsyncRoot(config: OptionsAsync) {
     return {
       module: MailgunModule,
       //   controllers: [
@@ -33,7 +31,7 @@ export class MailgunModule {
     };
   }
   private static createAsyncProviders(
-    options: ConfigurationMailgunAsync,
+    options: OptionsAsync,
   ): Provider {
     return {
       provide: MAILGUN_CONFIGURATION,
