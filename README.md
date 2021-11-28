@@ -19,8 +19,8 @@
 
 ### Introduction
 
-This is a simple wrapper of [mailgun-js](https://www.npmjs.com/package/mailgun-js).
-It only supports sending and verifying emails, but later more will be added. Just ping me or open pull request and contribute :)
+This is a simple wrapper of [mailgun.js](https://www.npmjs.com/package/mailgun.js).
+It supports sending, verifying emails and list operations, but later more will be added. Just ping me or open pull request and contribute :)
 
 ### Installation
 
@@ -37,9 +37,11 @@ import { MailgunModule } from '@nextnm/nestjs-mailgun';
 @Module({
   imports: [
     MailgunModule.forRoot({
-      DOMAIN: '<Your Domain>',
-      API_KEY: '<Your API_KEY>',
-      HOST: '<Your Host>', // default: 'api.mailgun.net'. Note that if you are using the EU region the host should be set to 'api.eu.mailgun.net'
+      username: 'string',
+      key: 'string',
+      public_key: 'string', // OPTIONAL
+      timeout: 'number', // OPTIONAL
+      url: 'string', // OPTIONAL // default: 'api.mailgun.net'. Note that if you are using the EU region the host should be set to 'api.eu.mailgun.net'
     }),
   ],
   providers: [],
@@ -57,9 +59,11 @@ import { MailgunModule } from '@nextnm/nestjs-mailgun';
     MailgunModule.forAsyncRoot({
       useFactory: async () => {
         return {
-          DOMAIN: '<Your Domain>',
-          API_KEY: '<Your API_KEY>',
-          HOST: '<Your Host>', // default: 'api.mailgun.net'. Note that if you are using the EU region the host should be set to 'api.eu.mailgun.net'
+          username: 'string',
+          key: 'string',
+          public_key: 'string', // OPTIONAL
+          timeout: 'number', // OPTIONAL
+          url: 'string', // OPTIONAL // default: 'api.mailgun.net'. Note that if you are using the EU region the host should be set to 'api.eu.mailgun.net'
         };
       },
     }),
@@ -121,7 +125,7 @@ To check if an email is real or not.
 
 ```typescript
 import { MailgunService } from '@nextnm/nestjs-mailgun';
-import { EmailOptions } from '@nextnm/nestjs-mailgun'
+import { EmailOptions } from '@nextnm/nestjs-mailgun';
 
 @Injectable()
 export class YourService {
@@ -136,10 +140,9 @@ export class YourService {
 To create a list of emails
 you need parameter data type CreateUpdateList which contain
 
-
 ```typescript
 import { MailgunService } from '@nextnm/nestjs-mailgun';
-import { EmailOptions } from '@nextnm/nestjs-mailgun'
+import { EmailOptions } from '@nextnm/nestjs-mailgun';
 
 @Injectable()
 export class YourService {
@@ -148,14 +151,14 @@ export class YourService {
   }
 }
 ```
+
 #### Destroy List Method
 
 To destroy a list of emails
 
-
 ```typescript
 import { MailgunService } from '@nextnm/nestjs-mailgun';
-import { EmailOptions } from '@nextnm/nestjs-mailgun'
+import { EmailOptions } from '@nextnm/nestjs-mailgun';
 
 @Injectable()
 export class YourService {
@@ -169,10 +172,9 @@ export class YourService {
 
 To Get a list of emails
 
-
 ```typescript
 import { MailgunService } from '@nextnm/nestjs-mailgun';
-import { EmailOptions } from '@nextnm/nestjs-mailgun'
+import { EmailOptions } from '@nextnm/nestjs-mailgun';
 
 @Injectable()
 export class YourService {
@@ -181,122 +183,114 @@ export class YourService {
   }
 }
 ```
+
 #### Update List Method
 
 To Update a list of emails
 data is an object like:
 
-  {
-    address: string;
-    name?: string;
-    description?: string;
-    access_level?: 'readonly' | 'members' | 'everyone';
-    reply_preference?: 'list' | 'sender';
+{
+address: string;
+name?: string;
+description?: string;
+access_level?: 'readonly' | 'members' | 'everyone';
+reply_preference?: 'list' | 'sender';
 }
-
-
-
 
 ```typescript
 import { MailgunService } from '@nextnm/nestjs-mailgun';
-import { EmailOptions } from '@nextnm/nestjs-mailgun'
+import { EmailOptions } from '@nextnm/nestjs-mailgun';
 
 @Injectable()
 export class YourService {
   constructor(private mailgunService: MailgunService) {
-    await this.mailgunService.updateList('mailListAddress@n.com',data);
+    await this.mailgunService.updateList('mailListAddress@n.com', data);
   }
 }
 ```
-#### Add member to a List 
 
-To add a member to the list 
+#### Add member to a List
+
+To add a member to the list
 data is an object like:
 
-  {
-    address: string;
-    name?: string;
-    vars?: string;
-    subscribed?: 'yes' | 'no' | boolean;
-    upsert?: 'yes' | 'no';
+{
+address: string;
+name?: string;
+vars?: string;
+subscribed?: 'yes' | 'no' | boolean;
+upsert?: 'yes' | 'no';
 }
-
-
-
 
 ```typescript
 import { MailgunService } from '@nextnm/nestjs-mailgun';
-import { EmailOptions } from '@nextnm/nestjs-mailgun'
+import { EmailOptions } from '@nextnm/nestjs-mailgun';
 
 @Injectable()
 export class YourService {
   constructor(private mailgunService: MailgunService) {
-    await this.mailgunService.listAddMember('mailListAddress@n.com',data);
+    await this.mailgunService.listAddMember('mailListAddress@n.com', data);
   }
 }
 ```
 
-#### Get members of a List 
+#### Get members of a List
 
-To get a member of the list 
+To get a member of the list
 Query is an object like:
 
-  {
-    subscribed?: 'yes' | 'no';
-    limit?: number;
+{
+subscribed?: 'yes' | 'no';
+limit?: number;
 }
-
-
-
 
 ```typescript
 import { MailgunService } from '@nextnm/nestjs-mailgun';
-import { EmailOptions } from '@nextnm/nestjs-mailgun'
+import { EmailOptions } from '@nextnm/nestjs-mailgun';
 
 @Injectable()
 export class YourService {
   constructor(private mailgunService: MailgunService) {
-    await this.mailgunService.listGetMembers('mailListAddress@n.com',query);
+    await this.mailgunService.listGetMembers('mailListAddress@n.com', query);
   }
 }
 ```
 
+#### Update members of a List
 
-
-#### list update members of a List 
-
-To update member of the list 
-
-
-
+To update member of the list
 
 ```typescript
 import { MailgunService } from '@nextnm/nestjs-mailgun';
-import { EmailOptions } from '@nextnm/nestjs-mailgun'
+import { EmailOptions } from '@nextnm/nestjs-mailgun';
 
 @Injectable()
 export class YourService {
   constructor(private mailgunService: MailgunService) {
-    await this.mailgunService.listupdateMember('mailListAddress@n.com','memberAddress',data);
+    await this.mailgunService.listupdateMember(
+      'mailListAddress@n.com',
+      'memberAddress',
+      data,
+    );
   }
 }
 ```
 
-#### list destroy member of a List 
+#### Destroy member of a List
 
-To destroy member of the list 
-
-
-
+To destroy member of the list
 
 ```typescript
 import { MailgunService } from '@nextnm/nestjs-mailgun';
-import { EmailOptions } from '@nextnm/nestjs-mailgun'
+import { EmailOptions } from '@nextnm/nestjs-mailgun';
 
 @Injectable()
 export class YourService {
   constructor(private mailgunService: MailgunService) {
-    await this.mailgunService.listDestroyMember('mailListAddress@n.com','memberAddress');
+    await this.mailgunService.listDestroyMember(
+      'mailListAddress@n.com',
+      'memberAddress',
+    );
   }
 }
 ```
