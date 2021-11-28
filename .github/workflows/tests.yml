@@ -10,6 +10,8 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: 14
+        env:
+          MAILGUN_DOMAIN: ${{ secrets.MAILGUN_DOMAIN }}
+          MAILGUN_KEY: ${{ secrets.MAILGUN_KEY }}
       - run: npm install
-      - run: ${{ secrets.NPM_TOKEN }} npm test
-      - run: MAILGUN_KEY=${{ secrets.MAILGUN_KEY }} MAILGUN_DOMAIN=${{ secrets.MAILGUN_DOMAIN }} npm test
+      - run: npm test
