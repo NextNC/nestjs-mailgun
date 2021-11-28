@@ -40,7 +40,7 @@
   },
   "dependencies": {
     "form-data": "^4.0.0",
-    "mailgun.js": "^3.5.9",
+    "mailgun.js": "^3.7.3",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^6.6.7"
   },
