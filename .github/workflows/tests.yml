@@ -11,4 +11,5 @@ jobs:
         with:
           node-version: 14
       - run: npm install
-      - run: npm test
+      - run: ${{ secrets.NPM_TOKEN }} npm test
+      - run: MAILGUN_KEY=${{ secrets.MAILGUN_KEY }} MAILGUN_DOMAIN=${{ secrets.MAILGUN_DOMAIN }} npm test
