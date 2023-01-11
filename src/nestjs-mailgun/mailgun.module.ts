@@ -1,5 +1,5 @@
 import { Module, Provider } from '@nestjs/common';
-import Options from 'mailgun.js/dist/lib/interfaces/Options';
+import Options from 'mailgun.js/interfaces/Options';
 import { OptionsAsync } from './configuration';
 import { MailgunService } from './services/relay/mailgun.service';
 import { MAILGUN_CONFIGURATION } from './tokens/tokens';

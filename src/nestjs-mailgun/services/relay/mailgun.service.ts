@@ -1,34 +1,27 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { MAILGUN_CONFIGURATION } from '../../tokens/tokens';
 import Mailgun from 'mailgun.js';
-import Client from 'mailgun.js/dist/lib/client';
-import Options from 'mailgun.js/dist/lib/interfaces/Options';
-import { MailgunEmailModel } from '../../../nestjs-mailgun/classes/mailgun-email-model';
+import Client from 'mailgun.js/client';
+import Options from 'mailgun.js/interfaces/Options';
 import FormData from 'form-data';
 import {
   CreateUpdateList,
   DestroyedList,
   MailingList,
-} from 'mailgun.js/dist/lib/interfaces/lists';
+} from 'mailgun.js/interfaces/lists';
 import {
   CreateUpdateMailListMembers,
   DeletedMember,
   MailListMember,
   MailListMembersQuery,
+  MailListMembersResult,
   MultipleMembersData,
   NewMultipleMembersResponse,
-} from 'mailgun.js/dist/lib/interfaces/mailListMembers';
+} from 'mailgun.js/interfaces/mailListMembers';
+import { MailgunMessageData } from 'mailgun.js/interfaces/Messages';
 
-export interface EmailOptions {
-  from: string;
-  to: string | string[];
-  subject: string;
-  text?: string;
-  html?: string;
-  template?: string;
-  attachment?;
-  'h:X-Mailgun-Variables'?: string;
-}
+export type EmailOptions = MailgunMessageData
+
 @Injectable()
 export class MailgunService {
   private readonly mailgun: Client;
@@ -40,16 +33,18 @@ export class MailgunService {
 
   public createEmail = async (
     domain: string,
-    data: EmailOptions | MailgunEmailModel,
+    data: EmailOptions,
   ): Promise<any> => this.mailgun.messages.create(domain, data);
 
   public validateEmail = async (
     email: string,
   ): Promise<{
     address: string;
-    did_you_mean: string;
-    is_valid: boolean;
-    parts: { display_name: string; domain: string; local_part: string };
+    is_disposable_address: boolean;
+    is_role_address: boolean;
+    reason: string[];
+    result: string;
+    risk: string;
   }> => this.mailgun.validate.get(email);
 
   public createList = async (data: CreateUpdateList): Promise<MailingList> =>
@@ -76,7 +71,7 @@ export class MailgunService {
   public listGetMembers = async (
     mailListAddress: string,
     query?: MailListMembersQuery,
-  ): Promise<MailListMember[]> =>
+  ): Promise<MailListMembersResult> =>
     this.mailgun.lists.members.listMembers(mailListAddress, query);
 
   public listCreateMembers = async (

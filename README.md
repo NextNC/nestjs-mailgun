@@ -108,15 +108,8 @@ export class YourService {
       attachment:''
       'h:X-Mailgun-Variables': '{"key":"value"}'
     };
-// data is mailgunEmailModel
     await this.mailgunService.createEmail(domain,data);
 
-
-    // OR can use the class
-
-    const email = new MailgunEmailModel('from', 'to', 'subject', 'text', 'html', 'template','attachment', { key: 'value' });
-
-    await this.mailgunService.createEmail(domain,data);
   }
 ```
 

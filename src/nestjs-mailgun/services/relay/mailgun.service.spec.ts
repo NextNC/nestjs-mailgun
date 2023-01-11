@@ -27,6 +27,7 @@ describe('MailgunService', () => {
     expect(service).toBeDefined();
   });
 
+
   it('Send email', () => {
     return expect(
       service.createEmail(process.env.MAILGUN_DOMAIN, {
@@ -38,9 +39,9 @@ describe('MailgunService', () => {
     ).resolves.toBeDefined();
   });
 
-  // it('Validate email', () => {
-  //   return expect(
-  //     service.validateEmail('nuno.carvalhao@gmail.com'),
-  //   ).resolves.toBeDefined();
-  // });
+  it.skip('Validate email', () => {
+    return expect(
+      service.validateEmail('postmaster@closeroffice.closerdev.com'),
+    ).resolves.toBeDefined();
+  });
 });
