@@ -28,15 +28,15 @@ describe('MailgunService', () => {
   });
 
 
-  it('Send email', () => {
-    return expect(
-      service.createEmail(process.env.MAILGUN_DOMAIN, {
+  it('Send email', async () => {
+     expect(await
+      service.createEmail(process.env.MAILGUN_DOMAIN as string, {
         from: 'package@test.com',
         subject: 'TEST',
         to: 'benfica000@gmail.com',
         text: 'Test was successful',
       }),
-    ).resolves.toBeDefined();
+    ).toBeDefined();
   });
 
   it.skip('Validate email', () => {

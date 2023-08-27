@@ -1,12 +1,12 @@
 import { Module, Provider } from '@nestjs/common';
-import Options from 'mailgun.js/interfaces/Options';
 import { OptionsAsync } from './configuration';
 import { MailgunService } from './services/relay/mailgun.service';
 import { MAILGUN_CONFIGURATION } from './tokens/tokens';
+import { MailgunClientOptions } from 'mailgun.js';
 
 @Module({})
 export class MailgunModule {
-  public static forRoot(config: Options) {
+  public static forRoot(config: MailgunClientOptions) {
     return {
       module: MailgunModule,
       //   controllers: [
