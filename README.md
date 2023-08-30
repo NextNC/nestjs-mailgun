@@ -42,7 +42,7 @@ import { MailgunModule } from '@nextnm/nestjs-mailgun';
       key: 'string',
       public_key: 'string', // OPTIONAL
       timeout: 'number', // OPTIONAL
-      url: 'string', // OPTIONAL // default: 'api.mailgun.net'. Note that if you are using the EU region the host should be set to 'api.eu.mailgun.net'
+      url: 'string', // OPTIONAL // default: 'https://api.mailgun.net'. Note that if you are using the EU region the host should be set to 'https://api.eu.mailgun.net'
     }),
   ],
   providers: [],
@@ -64,7 +64,7 @@ import { MailgunModule } from '@nextnm/nestjs-mailgun';
           key: 'string',
           public_key: 'string', // OPTIONAL
           timeout: 'number', // OPTIONAL
-          url: 'string', // OPTIONAL // default: 'api.mailgun.net'. Note that if you are using the EU region the host should be set to 'api.eu.mailgun.net'
+          url: 'string', // OPTIONAL // default: 'https://api.mailgun.net'. Note that if you are using the EU region the host should be set to 'https://api.eu.mailgun.net'
         };
       },
     }),
